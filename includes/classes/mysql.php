@@ -337,6 +337,11 @@ class sql_db
 		$result = @mysql_set_charset($charset, $this->db_connect_id);
 		return $result;
 	}
+	function escape($string) {
+		
+		return mysql_real_escape_string($string);
+		
+	}
 
 } // class sql_db
 
