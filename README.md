@@ -1,7 +1,7 @@
 # Smack Jeeves Interview: Code Task
 
 ## Objective
-Build a one-page app that allows the user to upload multiple images at a time. After selecting images to upload, a form for each image should be propogated, allowing the user to add a Title and Description to the image before uploading.
+Build a one-page app that allows the user to upload multiple images at a time. After selecting images to upload, a form for each image should be propagated, allowing the user to add a Title and Description to the image before uploading.
 
 ### App URL
 The app can be viewed at http://localhost/sj_test/
@@ -39,6 +39,6 @@ $now = $row['now'];
 A JavaScript `Utils` object is provided with some utilities to help you complete the task. It is located in [/js/Utils.js](/js/Utils.js).
 
 ## Bonus Objectives
-* Have the title automatically propogate based on the filename
+* Have the title automatically propagate based on the filename
 * Make the title required using Bootstrap validation rules and/or styles (https://getbootstrap.com/docs/4.1/components/forms/#validation)
 * Add an upload progress bar for each image
