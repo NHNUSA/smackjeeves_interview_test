@@ -26,6 +26,6 @@ The database wrapper class is defined in [/classes/mysql.db](/classes/mysql.db) 
 A JavaScript `Utils` object is provided with some utilities to help you complete the task. It is located in [/js/Utils.js](/js/Utils.js).
 
 ## Bonus Objectives
-* Have the title automatically propagate based on the filename
-* Make the title required using Bootstrap validation rules and/or styles (https://getbootstrap.com/docs/4.1/components/forms/#validation)
+* Have the image title field automatically populate based on the filename
+* Make the title field required using Bootstrap validation rules and/or styles (https://getbootstrap.com/docs/4.1/components/forms/#validation)
 * Add an upload progress bar for each image
