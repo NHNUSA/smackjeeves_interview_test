@@ -3,6 +3,9 @@
 ## Objective
 Build a one-page app that allows the user to upload multiple images at a time. After selecting images to upload, a form for each image should be propogated, allowing the user to add a Title and Description to the image before uploading.
 
+### URL
+The app can be viewed at http://localhost/sj_test/
+
 ### Additional Requirements
 * Update the UI to indicate when each image has finished uploading
 * Save each image uploaded to the server in the [/images/uploaded/](/images/uploaded/) directory
