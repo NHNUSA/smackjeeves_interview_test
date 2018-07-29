@@ -9,7 +9,7 @@ Build a one-page app that allows the user to upload multiple images at a time. A
 ### Additional Requirements
 * After the user clicks "Upload", update the UI to indicate when each image has finished uploading
 * Save each image uploaded to the server in the [/images/uploaded/](/images/uploaded/) directory
-* Store each image's title, description and saved filename as a record in the database
+* Store each image's title, description and saved filename as a record in the database. Each image record should have a unique ID.
 
 
 ## Starting Resources
