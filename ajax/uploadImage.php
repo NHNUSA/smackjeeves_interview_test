@@ -12,7 +12,7 @@ $uploadPath = $root_path . 'images/uploaded/';
 
 // TODO: Save the image to the /images/uploaded/ directory
 
-// TODO: Save the image in the database
+// TODO: Save the image data in the database
 
 
 
