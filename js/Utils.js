@@ -1,14 +1,11 @@
 var Utils = (function() {
 	
 	var Utils = {
-		imageFromInputFile: function( inputFile ) {
+		imageSrcFromInputFile: function( inputFile ) {
 			
-			var image = new Image(),
-				_URL = window.URL || window.webkitURL;
+			var _URL = window.URL || window.webkitURL;
 			
-			image.src = _URL.createObjectURL( inputFile );
-			
-			return image;
+			return _URL.createObjectURL( inputFile );
 			
 		}
 	};

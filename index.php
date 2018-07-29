@@ -26,18 +26,27 @@
 	<!-- Custom Styles -->
 	<style type="text/css">
 	
+		body {
+			padding: 24px;
+		}
+	
 		.upload-image-preview {
 			display: flex;
 			justify-content: center;
+			align-items: center;
 		}
 	
 		.upload-image-preview img {
 			max-width: 100%;
-			max-height: 350px;
+			max-height: 300px;
 			padding: 4px;
 			border: 1px solid #ced4da;
 			border-radius: .25rem;
 			margin-top: .25rem;
+		}
+		
+		.hidden {
+			display: none;
 		}
 	
 	</style>
@@ -48,7 +57,7 @@
   
     <div class="container theme-showcase" role="main">
     
-    	<div class="jumbotron" style="margin-top: 20px">
+    	<div class="jumbotron">
     	
     		<h1>Multi-Image Uploader</h1>
     		
@@ -65,11 +74,11 @@
 				<small>After the user chooses images to upload, one of these input templates should be populated for each image selected. You may delete or otherwise hide this block of HTML after making use of it.</small>
 			</div>
 			
-			<div id="per-image-form">
+			<div id="imageMetadataTemplate">
 			
 				<div class="container">
 				
-					<div class="row">
+					<div class="row mb-3">
 					
 						<div class="col-4 upload-image-preview">
 						
@@ -80,13 +89,13 @@
 						<div class="col">
 						
 							<div class="form-group">
-								<label for="inputTitle">Title</label>
-								<input type="text" class="form-control" id="inputTitle" placeholder="Image Title">
+								<label>Title</label>
+								<input type="text" class="form-control input-title" placeholder="Image Title">
 							</div>
 							
 							<div class="form-group">
-								<label for="inputDescription">Description</label>
-								<textarea class="form-control" id="inputDescription" placeholder="Image Description"></textarea>
+								<label>Description</label>
+								<textarea class="form-control input-description" placeholder="Image Description"></textarea>
 							</div>
 						
 						</div>
@@ -101,12 +110,15 @@
 		
 		<h1>Choose Images</h1>
 
-		<form>
+		<form id="imageUploadForm">
 			<div class="input-group mb-3">
 				<div class="custom-file">
-					<input type="file" class="custom-file-input" id="uploadImages" accept="image/*" multiple>
+					<input name="files[]" type="file" class="custom-file-input" id="imageFileInput" accept="image/*" multiple>
 					<label class="custom-file-label" for="uploadImages">Choose Images</label>
 				</div>
+			</div>
+			<div id="imageMetadataForms">
+				
 			</div>
 			<button id="btnUpload" type="submit" class="btn btn-primary hidden">Upload</button>
 		</form>
@@ -115,20 +127,104 @@
 	
 	<script>
 
-		$('#uploadImages').change(function() {
+		(function() {
 
-			var files = this.files,
-				$uploadImages = $(this);
+			$('#template-info').hide();
 
-			// TODO: Populate title/description input forms for each image selected
+			var $perImageFormTemplate = $('#imageMetadataTemplate > *'),
+				$imageUploadForm = $('#imageUploadForm'),
+				$imageMetadataForms = $('#imageMetadataForms'),
+				$imageFileInput = $('#imageFileInput'),
+				formArray = [],
+				currentFiles,
+				$btnUpload = $('#btnUpload');
 
-			$.each(files, function(i, file) {
+			$imageFileInput.change(function() {
+	
+				var files = currentFiles = this.files,
+					$uploadImages = $(this);
 
-				console.log( file );
+				$imageMetadataForms.empty();
+	
+				// TODO: Populate title/description input forms for each image selected
+				if( files.length > 0 ) {
+
+					$btnUpload.show();
+					
+					$.each(files, function(i, file) {
+
+						var $metadataForm = $perImageFormTemplate.clone(),
+							$img = $metadataForm.find('img').attr('src', Utils.imageSrcFromInputFile( file ));
+		
+						$imageMetadataForms.append(
+							$metadataForm
+						);
+
+						formArray.push( $metadataForm );
+						
+					});
+
+				}
+	
+			});
+
+			function uploadNextInQueue(uploadQueue, curIndex) {
+
+				curIndex = curIndex || 0;
+
+				if( uploadQueue && uploadQueue[curIndex] ) {
+
+					var uploadData = uploadQueue[curIndex],
+						formData = new FormData();
+
+					formData.append('title', uploadData.title);
+					formData.append('description', uploadData.description);
+					formData.append('image', currentFiles[curIndex]);
+
+					$.ajax({
+						url: 'ajax/uploadImage.php',
+						type: 'POST',
+						data: formData,
+						success: function( response ) {
+
+							// Upload the next
+							uploadNextInQueue(uploadQueue, curIndex + 1);
+							
+						},
+						cache: false,
+						contentType: false,
+						processData: false
+					});
+
+				}
+				
+			}
+
+			$imageUploadForm.submit(function() {
+
+				var uploadQueue = [];
+
+				$.each(formArray, function(i, $metadataForm) {
+
+					var file = currentFiles[i],
+						title = $metadataForm.find('.input-title').val(),
+						description = $metadataForm.find('.input-description').val();
+
+					uploadQueue.push({
+						file: file,
+						title: title,
+						description: description
+					});
+					
+				});
+
+				uploadNextInQueue( uploadQueue );
+				
+				return false;
 				
 			});
 
-		});
+		})();
 
 	</script>
     
