@@ -58,7 +58,7 @@
     	
     	</div>
 		
-		<div style="margin-bottom: 80px">
+		<div id="template-info" style="margin-bottom: 80px">
 		
 			<div style="margin-bottom: 20px">
 				<h2>Image Title/Description Template</h2>
