@@ -137,9 +137,10 @@
 
 			$imageFileInput.change(function() {
 	
-				var files = currentFiles = this.files;
+				currentFiles = this.files;
 	
-				// TODO: Populate title + description forms for each image selected
+				// TODO: Populate a title + description form for each image selected
+				// Hint: Utils.imageSrcFromInputFile( inputFile )
 				console.log( currentFiles );
 	
 			});
@@ -152,7 +153,7 @@
 				$.ajax({
 					url: 'ajax/uploadImage.php',
 					type: 'POST',
-					data: {/* TODO: Hint: https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData */},
+					data: {/* TODO. Hint: jQuery will accept a FormData object, see https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData */},
 					success: function( response ) {
 
 						// TODO
