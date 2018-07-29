@@ -8,12 +8,7 @@
 
 								*/
 
-if ( !defined('IN_SCRIPT') )
-{
-	die("Hacking attempt");
-}
-
-include($root_path . 'db/mysql.php');
+require($root_path . 'includes/classes/mysql.php');
 
 // Make the database connection.
 $db = new sql_db(DB_HOST, DB_USER, DB_PASS, DB_DATABASE, false);
