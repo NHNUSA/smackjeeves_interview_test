@@ -13,6 +13,9 @@ Build a one-page app that allows the user to upload multiple images at a time. A
 ### Starter code, TODO code blocks
 To help save time, much of the task has been started for you already. Look for `// TODO` comments to see where you need to add functionality.
 
+### phpMyAdmin
+phpMyAdmin can be used to manage the database, i.e. create/view/edit tables. It is available at http://localhost/phpmyadmin/
+
 ### The database connection and class
 The database wrapper class is defined in [/classes/mysql.db](/classes/mysql.db) and the connection is made in [/includes/db.php](/includes/db.php). In practice, it is used as a singleton and made available via the global variable `$db`. Here's an example usage:
 ```
