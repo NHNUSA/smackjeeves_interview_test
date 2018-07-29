@@ -20,21 +20,8 @@ To help save time, much of the task has been started for you already. Look for `
 phpMyAdmin can be used to manage the database, i.e. create/view/edit tables. It is available at http://localhost/phpmyadmin/
 
 ### The database connection and class
-The database wrapper class is defined in [/classes/mysql.db](/classes/mysql.db) and the connection is made in [/includes/db.php](/includes/db.php) which is automatically included by [/common.php](/common.php). In practice, the database wrapper is used as a singleton and made available via the global variable `$db`. Here's an example usage:
-```
+The database wrapper class is defined in [/classes/mysql.db](/classes/mysql.db) and the connection is made in [/includes/db.php](/includes/db.php) which is automatically included by [/common.php](/common.php). Example usage is demonstrated in [/ajax/uploadImage.php](/ajax/uploadImage.php).
 
-$sql = "SELECT NOW() as now";
-
-if( !$result = $db->sql_query($sql) ) {
-
-  throw new Exception('Could not perform query');
-  
-}
-
-$row = $db->sql_fetchrow($result);
-$now = $row['now'];
-
-```
 ### JavaScript Utils
 A JavaScript `Utils` object is provided with some utilities to help you complete the task. It is located in [/js/Utils.js](/js/Utils.js).
 
