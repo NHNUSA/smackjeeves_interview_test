@@ -67,10 +67,10 @@
     	
     	</div>
 		
-		<div id="template-info" style="margin-bottom: 80px">
+		<div id="templateInfo" style="margin-bottom: 40px">
 		
 			<div style="margin-bottom: 20px">
-				<h2>Image Title/Description Template</h2>
+				<h2>Image Metadata Template</h2>
 				<small>After the user chooses images to upload, one of these input templates should be populated for each image selected. You may delete or otherwise hide this block of HTML after making use of it.</small>
 			</div>
 			
@@ -114,11 +114,11 @@
 			<div class="input-group mb-3">
 				<div class="custom-file">
 					<input name="files[]" type="file" class="custom-file-input" id="imageFileInput" accept="image/*" multiple>
-					<label class="custom-file-label" for="uploadImages">Choose Images</label>
+					<label class="custom-file-label" for="imageFileInput">Choose Images</label>
 				</div>
 			</div>
-			<div id="imageMetadataForms">
-				
+			<div class="alert alert-info" role="alert">
+				<strong>Instructions:</strong> The Title + Description forms should propagate here after the user chooses images to upload.
 			</div>
 			<button id="btnUpload" type="submit" class="btn btn-primary hidden">Upload</button>
 		</form>
@@ -129,98 +129,39 @@
 
 		(function() {
 
-			$('#template-info').hide();
-
-			var $perImageFormTemplate = $('#imageMetadataTemplate > *'),
-				$imageUploadForm = $('#imageUploadForm'),
-				$imageMetadataForms = $('#imageMetadataForms'),
+			var $imageUploadForm = $('#imageUploadForm'),
 				$imageFileInput = $('#imageFileInput'),
-				formArray = [],
+				$templateInfo = $('#templateInfo'),
 				currentFiles,
 				$btnUpload = $('#btnUpload');
 
 			$imageFileInput.change(function() {
 	
-				var files = currentFiles = this.files,
-					$uploadImages = $(this);
-
-				$imageMetadataForms.empty();
+				var files = currentFiles = this.files;
 	
-				// TODO: Populate title/description input forms for each image selected
-				if( files.length > 0 ) {
-
-					$btnUpload.show();
-					
-					$.each(files, function(i, file) {
-
-						var $metadataForm = $perImageFormTemplate.clone(),
-							$img = $metadataForm.find('img').attr('src', Utils.imageSrcFromInputFile( file ));
-		
-						$imageMetadataForms.append(
-							$metadataForm
-						);
-
-						formArray.push( $metadataForm );
-						
-					});
-
-				}
+				// TODO: Populate title + description forms for each image selected
+				console.log( currentFiles );
 	
 			});
 
-			function uploadNextInQueue(uploadQueue, curIndex) {
-
-				curIndex = curIndex || 0;
-
-				if( uploadQueue && uploadQueue[curIndex] ) {
-
-					var uploadData = uploadQueue[curIndex],
-						formData = new FormData();
-
-					formData.append('title', uploadData.title);
-					formData.append('description', uploadData.description);
-					formData.append('image', currentFiles[curIndex]);
-
-					$.ajax({
-						url: 'ajax/uploadImage.php',
-						type: 'POST',
-						data: formData,
-						success: function( response ) {
-
-							// Upload the next
-							uploadNextInQueue(uploadQueue, curIndex + 1);
-							
-						},
-						cache: false,
-						contentType: false,
-						processData: false
-					});
-
-				}
-				
-			}
-
 			$imageUploadForm.submit(function() {
 
-				var uploadQueue = [];
-
-				$.each(formArray, function(i, $metadataForm) {
-
-					var file = currentFiles[i],
-						title = $metadataForm.find('.input-title').val(),
-						description = $metadataForm.find('.input-description').val();
-
-					uploadQueue.push({
-						file: file,
-						title: title,
-						description: description
-					});
-					
-				});
-
-				uploadNextInQueue( uploadQueue );
+				// TODO: Upload each image to uploadImage.php (one at a time)
 				
-				return false;
+				// Here's some code to get you started. You may want to re-factor it into another function.
+				$.ajax({
+					url: 'ajax/uploadImage.php',
+					type: 'POST',
+					data: {/* TODO: Hint: https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData */},
+					success: function( response ) {
+
+						// TODO
+						
+					},
+					cache: false,
+					contentType: false,
+					processData: false
+				});
 				
 			});
 
