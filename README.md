@@ -1,10 +1,10 @@
 # Smack Jeeves Interview: Code Task
 
-## Objective
-Build a one-page app that allows the user to upload multiple images at a time. After selecting images to upload, a form for each image should be propagated, allowing the user to add a Title and Description to the image before uploading.
-
 ### App URL
 The app can be viewed at http://localhost/sj_test/
+
+## Objective
+Build a one-page app that allows the user to upload multiple images at a time. After selecting images to upload, a form for each image should be propagated, allowing the user to add a Title and Description to the image before uploading.
 
 ### Additional Requirements
 * Update the UI to indicate when each image has finished uploading
