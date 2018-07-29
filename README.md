@@ -20,4 +20,5 @@ $row = $db->sql_fetchrow($result);
 $now = $row['now'];
 
 ```
-
+### JavaScript Utils
+A JavaScript `Utils` object is provided with some utilities to help you complete the task. It is located in [/js/Utils.js](/js/Utils.js).
