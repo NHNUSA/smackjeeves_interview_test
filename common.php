@@ -3,8 +3,6 @@
 ini_set('display_errors', 1);
 error_reporting( E_ERROR | E_WARNING | E_PARSE );
 
-require($root_path . 'includes/classes/Utils.php');
-
 // Database Connection
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
