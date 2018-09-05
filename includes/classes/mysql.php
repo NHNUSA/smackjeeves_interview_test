@@ -20,7 +20,6 @@ class sql_db
 	var $query_result;
 	var $row = array();
 	var $rowset = array();
-	var $num_queries = 0;
 
 	//
 	// Constructor
@@ -91,15 +90,7 @@ class sql_db
 		unset($this->query_result);
 		if($query != "")
 		{
-			$this->num_queries++;
-
-			start_timer('query_timer');
 			$this->query_result = @mysql_query($query, $this->db_connect_id);
-			$query_time = stop_timer('query_timer');
-			
-			$GLOBALS['queries'][count($GLOBALS['queries']) + 1]['time'] = number_format($query_time, 3) . 's';
-			$GLOBALS['queries'][count($GLOBALS['queries'])]['query'] = $query;
-			
 		}
 		if($this->query_result)
 		{
